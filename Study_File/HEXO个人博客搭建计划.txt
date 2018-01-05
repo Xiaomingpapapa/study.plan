@@ -1,0 +1,25 @@
+HEXO大致原理(基于node.js平台的一个博客搭建框架)
+1.首先将编写好的markdown 文档以及资源文件解析称为HTML网页文件
+2.通过git将生成好的博客项目提交到远程的gitpage
+3.最后就可以通过访问gitpage来进而访问你的博客
+
+具体实现
+1.安装node.js平台，以及git
+2.通过npm安装hexo
+3.在指定目录下通过hexo init生成初始化博客文件目录
+4.在该目录下可以进行个人博客的配置编写
+5.通过hexo g(hexo generate)生成相应的静态网页文件,放在public文件夹
+6.可以通过hexo s(hexo server)将博客部署到本地服务器上，通过http://localhost:4000可以访问
+7.通过hexo d(hexo deploy),将本地的静态网页项目推送到远程github page，之后便可以通过网络访问自己的博客了
+
+
+其中关于git 往远程push page的需要在此说一下
+1.在github需要创建一个个人的仓库
+2.git 与 git实现关联通信（在远程github添加本地git生成的ssh密钥）
+3.在hexo blog的 config.yml文件中配置deploy 的方式以及指定仓库地址
+
+关于Blog主题配置
+1.需要先从github把相应的主题下载到本地
+2.设置Blog中config.yml文件的theme
+3.之后在主题文件中也有config.yml，用于进行该主题的详细配置
+

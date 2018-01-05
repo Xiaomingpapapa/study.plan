@@ -1,0 +1,73 @@
+集中式 与 分布式版本控制工具的区别
+
+集中式（SVN）
+只有一个公用中央的版本仓库，大家各自需要工作时，需要从公用的中央仓库中拉取最新的版本
+进行修改添加，完事儿之后再向中央仓库提交，由于大家本地都没有版本仓库，所以造成了每次工作
+需要联网更新，提交。
+
+分布式（Git）
+每个人的本地会创建一个版本仓库，用来记录修改，等工作完毕之后再提交到远程的中央仓库，大家在
+中央仓库中进行合并。 
+
+另外这边所说的版本控制，意思是对仓库中的文本文件进行追踪，保存每次修改的内容，非文本文件则无法
+追踪，如图片，只能是知道图片的大小变化，而具体改了什么是不知道的。
+
+每次对文件进行了修改
+可以用git add;
+git commit '修改说明' 将修改提交给本地仓库，因此每commit一次，相当于在本地保留了一个版本快照。
+
+通过git reset --hard HEAD^对版本进行回退 一个^代表向上回退一个版本
+
+Head指针用来指向当前版本，回退版本时，也就是Head指针向后移了一位
+若又想回到最新的版本，也就是版本Head向前走，则需要该版本的ID
+git reset -- hard version id
+可以通过git relog来查看版本id，版本id可以不用写全，能够唯一标识就行了。
+
+git暂存区概念（Stage）
+在本地仓库中有一个暂存区，用来存放每次进行了修改的东西，也就是git add操作
+本质上只是往暂存区中加内容，之后git commit操作则是把暂存区中的内容提交给仓库
+每次commit之后暂存区内容被清空。
+
+需要注意的是 git进行版本控制时，追踪管理的是修改而不是文件
+所以在每次修改之后，都需要add 进暂存区，之后一并将暂存区中的修改提交给仓库
+
+git checkout -- filename用来撤销对工作区某文件的修改
+假如当前暂存区有该file add 进来的修改，则回到当前暂存区文件状态
+假如当前暂存区为空，则回到最近一次commit的状态
+
+git reset HEAD filename 用来撤销暂存区的修改
+
+git 与 远程仓库github相关联
+首先需要将本地生成的公钥假如到远程的github账户中
+
+当第一次使用git的clone或者push命令连接github时，会有一个警告 ssh警告
+原因是git使用ssh连接github，当第一次连接时,ssh需要确认github所提供的key确实来自于github服务器，
+输入yes之后，git会输出一个警告，告诉你已经把github的key添加到本机的一个信任列表中了。
+
+
+本地多分支并行工作
+首先默认git本地仓库创建之后，会默认有一个主分支（master）,Head默认指向master
+通过git checkout -b branchName 命令 创建并切换到该分支
+相当于 git branch branchName;
+	git checkout branchName
+
+
+现实的开发过程中
+一般不会在master上进行工作，master分支主要用来做最终的merge工作已经发布项目的工作
+
+对于想要删除还没有合并的分支
+则需要使用强力删除 git branch -D branchname 普通的删除为 git branch -d branchname
+
+
+在本地创建远程对应的一个分支
+git checkout -b branch-name origin/branch-name
+
+将本地分支push到远程分支时
+假如提示 no tracking information 错误，则说明本地分支和远程分支没有相关联
+用命令 git brancn --set-upstream branch-name origin/branch-name进行关联
+
+假如推送失败 则说明远程分支上的内容和本地分支上的内容有冲突
+则先需要 git pull将远程分支上的提交拉取下来，之后进行冲突解决
+最后提交到远程 
+
+
