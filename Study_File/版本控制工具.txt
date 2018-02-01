@@ -70,4 +70,5 @@ git checkout -b branch-name origin/branch-name
 则先需要 git pull将远程分支上的提交拉取下来，之后进行冲突解决
 最后提交到远程 
 
+更新Git学习
 
