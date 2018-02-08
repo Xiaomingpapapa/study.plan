@@ -46,6 +46,9 @@ git 与 远程仓库github相关联
 
 
 本地多分支并行工作
+git branch -a 查看所有分支，包括远程分支
+git status 查看当前 的工作情况
+
 首先默认git本地仓库创建之后，会默认有一个主分支（master）,Head默认指向master
 通过git checkout -b branchName 命令 创建并切换到该分支
 相当于 git branch branchName;
