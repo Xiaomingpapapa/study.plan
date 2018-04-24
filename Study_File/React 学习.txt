@@ -1,0 +1,80 @@
+React
+定义：用于构建Web UI的前端框架（java script）
+相关：npm 包管理工具，集中管理了开发过程中可能需要使用到的应用包，方便进行下载
+安装使用：
+1. 安装node.js
+2. 使用npm包管理工具安装 react项目构建应用 npm install -g create-react-app
+3. 创建 react应用 create-react-app first-app
+
+特性：
+1. 实现 UI 与 数据绑定(非双向绑定，单向)，数据的更新影响着 UI 的更新，并且只对数据发生改变的 UI 进行更新
+
+2. 另外，react 实现了 Virtual DOM, 也就是不会直接的操作页面的 DOM 元素，而是通过 Virtual DOM 来统一
+管理需要进行更新的 DOM 元素，之后通过 diff算法 来进行更有效率的 UI 更新。
+
+使用：
+react 应用是由组件组成的(指的是能完成某个特定功能的独立的，可重用的代码) 将 JavaScript,HTML和 CSS放在同一个文件中，实现真正的组件封装
+组件的定义：调用 React.createClass() 函数来创建组件类 例如 var ReactComponent = React.createClass({});
+组件的调用：直接通过类名标签的形式 <ReactComponent />调用 这边注意 组件的名字需要大写，否则解析的时候会被误以为是 html标签而解析出错
+
+
+数据：
+组件的数据 包括 state props
+state 主要是组件内部使用
+props 则是组件对外的一个数据接口，供外部传递参数到组件内
+另外通过 propTypes来定义组件的参数传入限制 规定属性的类型
+通过 defaultProps 来给 props属性赋予默认值
+
+组件数据向外传递则通过 外部组件的传入的函数参数
+
+关于成员函数的this环境
+在ES6语法下，类中成员函数在调用时并不是自动与当前类的实例绑定的，所以在 构造函数中需要手动去绑定 this对象
+
+
+相关:
+ES6中的import和export用法
+React中使用的是模块化设计，也就是各个功能模块相互独立，同时也可以相互调用联系
+import 和 export 就是将各个react模块联系起来的桥梁
+首先 export 负责将当前定义的模块导出，充当为导出接口
+而 import 则可以在一个模块中将 其他带有导出接口 export 的模块导入使用
+使用规则： 用 export {var1, var2} 导出模块内定义的变量，注意需要使用大括号包起来，否则该处会被替换成
+变量的实际值，也就无法将变量的接口暴露出去。 外部需要使用时则通过 import {var1, var2} from 导入
+也可以使用 export default var1 导出变量 此处作为特殊导出 故不加大括号，外部需要调用则可以直接通过
+import 任意名字 from 来进行导入，但是一个模块文件中最多只能有一个 export default
+
+es6 解析赋值  例如 const {caption} = this.props; 意为从 props中获取 caption属性值
+
+JSX：
+JavaScript的语法扩展，可以在Js代码中插入像 HTML一样的代码，在React中，JSX最终会被转化成依赖于React的表达式
+在JSX中可以使用 html标签，当然也可以使用 React组件，React判断元素是 HTML元素还是 React组件根据的是首写字母的大小写
+React 将 事件绑定在组件上可以将其控制在组件范围内，不会污染全局空间。
+
+
+Flux 数据管理框架
+MVC框架缺陷 model 和 view 之间可以直接进行通信，那么当项目非常庞大时，就会出现多个 model和view之间的混乱关系，
+当修改其中的代码时，则可能会造成巨大的影响。
+
+Flux使用：
+安装 npm install --save flux
+
+组成：Action, Dispatcher, Store, View
+
+Action: 由View发出Action,action标识view的请求类型，其中带着纯粹的数据
+Dispatcher:用于接收view 发送的 action请求，但需要注意的是，dispatcher对象接收任何本对象发出的
+action请求，可在同一个dispatcher对象中注册监听方法,来监听action请求，在方法中根据action中的
+type数据字段来对action进行划分。
+
+Store: 负责处理用户的action请求，并且通知view对数据进行更新，在store中一般通过
+对Disatcher对象注册方法来监听处理action 请求。
+
+View：对数据进行显示，可接受store的数据更新通知来对view数据进行更新。
+
+
+
+
+
+
+
+
+
+
